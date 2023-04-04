@@ -1,0 +1,48 @@
+.addItem {
+    background-color: lightgray;
+    height: 91.5vh;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+#myForm {
+    display: inline-block;
+    text-align: right;
+    background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+    padding: 5rem;
+    border: .3rem;
+    border-style: solid;
+    border-color: #f99e1c;
+    border-radius: 3rem;
+}
+
+label, input {
+    padding: .5rem;
+}
+
+label {
+    color: #f99e1c;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+input {
+    margin: .2rem;
+    border-radius: .5rem;
+}
+
+#submit, #reset{
+    width: 5.75rem;
+    background-color: #f99e1c;
+    font-weight: bold;
+    font-size: .9rem;
+}
+
+#submit:hover, #reset:hover {
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    background-color: rgb(28, 27, 27);
+    color: #f99e1c;
+    border-color: #f99e1c;
+}

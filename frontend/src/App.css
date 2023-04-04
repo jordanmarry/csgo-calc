@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.container {
+    background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonContain {
+    padding: 1rem;
+}
+
+.buttonGoogle {
+    background-color: #f99e1c;
+    cursor:pointer;
+    padding: 1rem;
+    border-radius: 1rem;
+    font-weight: bold;
+}
+
+.buttonGoogle:hover {
+    background-color: rgb(28, 27, 27);
+    border-color: #f99e1c;
+    color: #f99e1c;
+    transition: all 0.2s ease-out;
+}
