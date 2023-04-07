@@ -2,30 +2,45 @@ const fs = require('fs');
 const cors = require('cors');
 const csv = require('csv-parser');
 const express = require('express');
-const market = require('steam-market-pricing');
-const { get } = require('http');
+const market  = require('steam-market-pricing');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 const app = express();
-
 const port = 5000;
-
 
 app.use(cors())
 app.use(express.json())
 
-app.get('/get-data', (req, res) => {
-  const results = [];
+async function getData() {
+  return new Promise((res, rej) => {
+    const results = [];
+    fs.createReadStream('../csgo.csv')
+      .pipe(csv())
+      .on('data', (data) => {
+        results.push(data);
+      })
+      .on('end', async () => {
+        for (let i = 0; i < results.length; i++) {
+          const item = results[i].itemName;
+          const price = await market.getItemPrice(730, item);
+          results[i]['steamPrice'] = price.lowest_price;
+        }
+        res(results);
+      })
+      .on('error', (error) => {
+        rej(error);
+      });
+  });
+}
 
-  fs.createReadStream('../csgo.csv')
-    .pipe(csv())
-    .on('data', (data) => {
-     results.push(data);
-
-    })
-    .on('end', () => {
-      res.json(results);
-    });
+app.get('/get-data', async (req, res) => {
+  try {
+    const data = await getData();
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error fetching data');
+  }
 });
 
 
